@@ -38,7 +38,7 @@ io.on("connection", socket => {
     io.to(data.roomId).emit("chat", data);
   });
 
-  
+
   socket.on("draw", data => {
     socket.to(data.roomId).emit("draw", data);
   });
@@ -52,7 +52,7 @@ io.on("connection", socket => {
   socket.on("ice", data => socket.to(data.roomId).emit("ice", data));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

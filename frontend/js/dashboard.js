@@ -17,7 +17,7 @@ const colors = ["c1", "c2", "c3", "c4", "c5"];
 
 async function loadRooms() {
   try {
-    const res = await fetch("http://localhost:3000/api/room/my", {
+    const res = await fetch("http://localhost:5000/api/room/my", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,10 +38,10 @@ async function loadRooms() {
     }
 
     rooms.forEach((room, i) => {
-  const div = document.createElement("div");
-  div.className = `room-card ${colors[i % colors.length]}`;
+      const div = document.createElement("div");
+      div.className = `room-card ${colors[i % colors.length]}`;
 
-  div.innerHTML = `
+      div.innerHTML = `
     <h3>${room.name}</h3>
     <p>Code: ${room.code}</p>
 
@@ -50,31 +50,31 @@ async function loadRooms() {
     ` : ""}
   `;
 
-  div.querySelector("h3").onclick = () => {
-    location.href = `room.html?roomId=${room._id}`;
-  };
+      div.querySelector("h3").onclick = () => {
+        location.href = `room.html?roomId=${room._id}`;
+      };
 
-  // DELETE ROOM
-  const deleteBtn = div.querySelector(".delete-btn");
-  if (deleteBtn) {
-    deleteBtn.onclick = async (e) => {
-      e.stopPropagation();
+      // DELETE ROOM
+      const deleteBtn = div.querySelector(".delete-btn");
+      if (deleteBtn) {
+        deleteBtn.onclick = async (e) => {
+          e.stopPropagation();
 
-      if (!confirm("Delete this room?")) return;
+          if (!confirm("Delete this room?")) return;
 
-      await fetch(`/api/room/${room._id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
+          await fetch(`/api/room/${room._id}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          });
 
-      loadRooms();
-    };
-  }
+          loadRooms();
+        };
+      }
 
-  roomsContainer.appendChild(div);
-});
+      roomsContainer.appendChild(div);
+    });
 
 
   } catch (err) {
@@ -90,7 +90,7 @@ async function createRoomPrompt() {
   if (!name) return;
 
   try {
-    const res = await fetch("http://localhost:3000/api/room/create", {
+    const res = await fetch("http://localhost:5000/api/room/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +119,7 @@ async function joinRoomPrompt() {
   if (!code) return;
 
   try {
-    const res = await fetch("http://localhost:3000/api/room/join", {
+    const res = await fetch("http://localhost:5000/api/room/join", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
