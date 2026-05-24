@@ -1,44 +1,118 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Room | StudyHub</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard-theme.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .room-wrapper {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 52px 64px 48px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* purple top stripe like .room-card */
+    .room-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7c6fff, #a855f7);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .room-wrapper h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .room-wrapper .subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .room-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .back-link {
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--purple);
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="card" style="max-width:700px">
-  <h1>Room Dashboard</h1>
-  <p class="subtitle">Choose what you want to do</p>
-
-  <div class="buttons">
-    <button class="btn btn-primary" onclick="joinConference()">
-      🎥 Join Conference
-    </button>
-
-    <button class="btn btn-secondary" onclick="openNotes()">
-      📝 Notes
-    </button>
+  <div class="study-bg">
+    <span>📚</span><span>✏️</span><span>💡</span><span>🎓</span>
+    <span>📝</span><span>🔬</span><span>📐</span><span>🖊️</span>
+    <span>📓</span><span>⚗️</span><span>🧮</span><span>📏</span>
   </div>
-</div>
 
-<script>
-  // ✅ GET ROOM ID FROM URL
-  const roomId = new URLSearchParams(window.location.search).get("roomId");
+  <div class="room-wrapper">
+    <h1>Room Dashboard</h1>
+    <p class="subtitle">Choose what you want to do</p>
 
-  if (!roomId) {
-    alert("Invalid room");
-    window.location.href = "dashboard.html";
-  }
+    <div class="room-actions">
+      <button class="btn btn-primary" onclick="joinConference()">
+        🎥 Join Conference
+      </button>
+      <button class="btn btn-secondary" onclick="openNotes()">
+        📝 Notes
+      </button>
+    </div>
 
-  // ✅ PASS roomId correctly
-  function joinConference() {
-    window.location.href = `conference.html?roomId=${roomId}`;
-  }
+    <div class="back-link" onclick="history.back()">← Back to dashboard</div>
+  </div>
 
-  function openNotes() {
-    window.location.href = `notes.html?roomId=${roomId}`;
-  }
-</script>
+  <script>
+    const roomId = new URLSearchParams(window.location.search).get("roomId");
+
+    if (!roomId) {
+      alert("Invalid room");
+      window.location.href = "dashboard.html";
+    }
+
+    function joinConference() {
+      window.location.href = `conference.html?roomId=${roomId}`;
+    }
+
+    function openNotes() {
+      window.location.href = `notes.html?roomId=${roomId}`;
+    }
+  </script>
 
 </body>
+
 </html>

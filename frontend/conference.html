@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>StudyHub Conference</title>
   <style>
@@ -82,9 +83,14 @@
     /* CHAT */
     .chat-box {
       flex: 1;
-      padding: 10px;
+      padding: 50px;
       overflow-y: auto;
-      background: #fafafa;
+      background: #f9f8f8;
+
+      font-size: 18px;
+      /* increases text size */
+      line-height: 1.0;
+      /* better readability */
     }
 
     .chat-message {
@@ -124,7 +130,7 @@
       padding: 8px 12px;
       border-radius: 6px;
       border: none;
-      background: #1a73e8;
+      background: #0072d5;
       color: white;
       cursor: pointer;
     }
@@ -158,49 +164,51 @@
     }
   </style>
 </head>
+
 <body>
 
-<div class="app">
-  <div class="video-area">
-    <video id="localVideo" autoplay muted></video>
-    <video id="remoteVideo" autoplay></video>
-  </div>
-
-  <div id="panel" class="side-panel">
-    <div class="panel-header">Whiteboard</div>
-    <canvas id="whiteboard"></canvas>
-    <div class="wb-tools">
-      <button onclick="setTool('pen')">✏ Pen</button>
-      <button onclick="setTool('eraser')">🧽 Erase</button>
-      <button onclick="clearBoard()">Clear</button>
+  <div class="app">
+    <div class="video-area">
+      <video id="localVideo" autoplay muted></video>
+      <video id="remoteVideo" autoplay></video>
     </div>
 
-    <div class="panel-header">Chat</div>
-    <div id="messages" class="chat-box"></div>
-    <div class="chat-input">
-      <input id="messageInput" placeholder="Type a message..." />
-      <button onclick="sendMessage()">Send</button>
+    <div id="panel" class="side-panel">
+      <div class="panel-header">Whiteboard</div>
+      <canvas id="whiteboard"></canvas>
+      <div class="wb-tools">
+        <button onclick="setTool('pen')">✏ Pen</button>
+        <button onclick="setTool('eraser')">🧽 Erase</button>
+        <button onclick="clearBoard()">Clear</button>
+      </div>
+
+      <div class="panel-header">Chat</div>
+      <div id="messages" class="chat-box"></div>
+      <div class="chat-input">
+        <input id="messageInput" placeholder="Type a message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="controls">
-  <button onclick="startCall()">🎥</button>
-  <button onclick="toggleCamera()">📷</button>
-  <button onclick="toggleMic()">🎤</button>
-  <button onclick="togglePanel()">📝</button>
-  <button onclick="leaveCall()">🚪</button>
+  <div class="controls">
+    <button onclick="startCall()">🎥</button>
+    <button onclick="toggleCamera()">📷</button>
+    <button onclick="toggleMic()">🎤</button>
+    <button onclick="togglePanel()">📝</button>
+    <button onclick="leaveCall()">🚪</button>
 
-</div>
+  </div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/call.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/call.js"></script>
 
-<script>
-  function togglePanel() {
-    document.getElementById("panel").classList.toggle("open");
-  }
-</script>
+  <script>
+    function togglePanel() {
+      document.getElementById("panel").classList.toggle("open");
+    }
+  </script>
 
 </body>
+
 </html>

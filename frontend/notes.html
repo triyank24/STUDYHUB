@@ -1,24 +1,171 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Notes | StudyHub</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard-theme.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .notes-wrapper {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 56px;
+      max-width: 620px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .notes-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7c6fff, #a855f7);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .notes-wrapper h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      margin-bottom: 28px;
+    }
+
+    .upload-area {
+      border: 1.5px dashed var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      text-align: center;
+      background: var(--purple-light);
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .upload-area:hover {
+      border-color: var(--purple);
+    }
+
+    .upload-area p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .upload-area .upload-icon {
+      font-size: 36px;
+    }
+
+    /* hide default file input, trigger via label */
+    #fileInput {
+      display: none;
+    }
+
+    .upload-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .file-label {
+      flex: 1;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .file-label:hover {
+      border-color: var(--purple);
+      background: var(--purple-light);
+    }
+
+    #notesList {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      padding: 32px 0 8px;
+    }
+
+    .back-link {
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 28px;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--purple);
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="card" style="max-width:900px">
+  <div class="study-bg">
+    <span>📚</span><span>✏️</span><span>💡</span><span>🎓</span>
+    <span>📝</span><span>🔬</span><span>📐</span><span>🖊️</span>
+    <span>📓</span><span>⚗️</span><span>🧮</span><span>📏</span>
+  </div>
 
-  <h1>Room Notes</h1>
+  <div class="notes-wrapper">
+    <h1>📝 Room Notes</h1>
 
-  <input type="file" id="fileInput" class="input">
-  <button class="btn btn-primary" onclick="uploadNote()">Upload</button>
+    <div class="upload-row">
+      <label class="file-label" for="fileInput" id="fileLabel">
+        📎 Choose a file...
+      </label>
+      <input type="file" id="fileInput">
+      <button class="btn btn-secondary" onclick="uploadNote()">Upload</button>
+    </div>
 
-  <div id="notesList" style="margin-top:30px"></div>
+    <div id="notesList">
+      <p class="empty-state">📭 No notes yet — upload one to get started!</p>
+    </div>
 
-</div>
+    <div class="back-link" onclick="history.back()">← Back to room</div>
+  </div>
 
-<script src="js/notes.js"></script>
+  <script>
+    // Show selected filename in the label
+    document.getElementById('fileInput').addEventListener('change', function () {
+      const label = document.getElementById('fileLabel');
+      label.textContent = this.files[0] ? '📎 ' + this.files[0].name : '📎 Choose a file...';
+    });
+  </script>
 
+  <script src="js/notes.js"></script>
 
 </body>
+
 </html>

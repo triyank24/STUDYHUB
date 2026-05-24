@@ -1,56 +1,58 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
   <title>Login | StudyHub</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard-theme.css">
+  <link rel="stylesheet" href="css/logintheme.css"> <!-- ADD THIS -->
 </head>
+
 <body>
 
-<div class="card" style="max-width:420px">
+  <body>
 
-  <div class="logo">
-    <div class="logo-icon">S</div>
-    <div class="logo-text">StudyHub</div>
-  </div>
+    <div class="study-bg">
+      <span>📚</span><span>✏️</span><span>💡</span><span>🎓</span>
+      <span>📝</span><span>🔬</span><span>📐</span><span>🖊️</span>
+      <span>📓</span><span>⚗️</span><span>🧮</span><span>📏</span>
+    </div>
 
-  <p class="subtitle">Welcome back</p>
+    <div class="card">
+      ...
+      <div class="card" style="max-width:420px">
 
-  <!-- REQUIRED IDs for auth.js -->
-  <input
-    id="email"
-    class="input"
-    type="email"
-    placeholder="Email"
-  >
+        <div class="logo">
+          <div class="logo-icon">S</div>
+          <div class="logo-text">StudyHub</div>
+        </div>
 
-  <input
-    id="password"
-    class="input"
-    type="password"
-    placeholder="Password"
-  >
+        <p class="subtitle">Welcome back</p>
 
-  <!-- ERROR MESSAGE -->
-  <p id="error" style="color:#ffcccc;margin-bottom:10px"></p>
+        <!-- REQUIRED IDs for auth.js -->
+        <input id="email" class="input" type="email" placeholder="Email">
 
-  <!-- WIRED BUTTON -->
-  <button
-    class="btn btn-primary"
-    style="width:100%"
-    onclick="login()"
-  >
-    Login
-  </button>
+        <input id="password" class="input" type="password" placeholder="Password">
 
-  <p style="margin-top:20px">
-    New here?
-    <a href="signup.html">Create account</a>
-  </p>
+        <!-- ERROR MESSAGE -->
+        <p id="error" style="color:#ffcccc;margin-bottom:10px"></p>
 
-</div>
+        <!-- WIRED BUTTON -->
+        <button class="btn btn-primary" style="width:100%" onclick="login()">
+          Login
+        </button>
 
-<!-- IMPORTANT -->
-<script src="js/auth.js"></script>
+        <p style="margin-top:20px">
+          New here?
+          <a href="signup.html">Create account</a>
+        </p>
 
-</body>
+      </div>
+
+      <!-- IMPORTANT -->
+      <script src="js/auth.js"></script>
+
+  </body>
+
 </html>
