@@ -1,4 +1,4 @@
-const API = " https://studyhub-1-ccz8.onrender.com/";
+const API = "https://studyhub-1-ccz8.onrender.com";
 
 /* ================= SEND OTP (SIGN UP) ================= */
 
@@ -16,7 +16,6 @@ function sendOtp() {
     return;
   }
 
-  // Save signup data temporarily
   localStorage.setItem(
     "signup",
     JSON.stringify({
@@ -27,7 +26,7 @@ function sendOtp() {
     })
   );
 
-  fetch(`${API}/send-otp`, {
+  fetch(`${API}/api/auth/send-otp`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: email.value })
@@ -58,7 +57,7 @@ function verifyOtp() {
     return;
   }
 
-  fetch(`${API}/verify-otp`, {
+  fetch(`${API}/api/auth/verify-otp`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...data, otp: otp.value })
@@ -94,7 +93,7 @@ function login() {
     return;
   }
 
-  fetch(`${API}/login`, {
+  fetch(`${API}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
