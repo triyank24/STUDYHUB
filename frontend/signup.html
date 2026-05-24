@@ -3,13 +3,133 @@
 
 <head>
   <title>Sign Up | StudyHub</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard-theme.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .auth-wrapper {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 44px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .auth-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7c6fff, #a855f7);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c6fff, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(124, 111, 255, 0.4);
+    }
+
+    .logo-text {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--text);
+      letter-spacing: -0.4px;
+    }
+
+    .auth-wrapper .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      box-sizing: border-box;
+    }
+
+    .auth-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .auth-input:focus {
+      border-color: var(--purple);
+      background: var(--purple-light);
+    }
+
+    #error {
+      color: var(--red);
+      font-size: 13px;
+      margin-bottom: 12px;
+      min-height: 18px;
+    }
+
+    .auth-footer {
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .auth-footer a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body>
 
-  <div class="card" style="max-width:420px">
+  <div class="study-bg">
+    <span>📚</span><span>✏️</span><span>💡</span><span>🎓</span>
+    <span>📝</span><span>🔬</span><span>📐</span><span>🖊️</span>
+    <span>📓</span><span>⚗️</span><span>🧮</span><span>📏</span>
+  </div>
 
+  <div class="auth-wrapper">
     <div class="logo">
       <div class="logo-icon">S</div>
       <div class="logo-text">StudyHub</div>
@@ -17,28 +137,20 @@
 
     <p class="subtitle">Create your account</p>
 
-    <!-- REQUIRED IDs for auth.js -->
-    <input id="email" class="input" type="email" placeholder="Email">
+    <input id="email" class="auth-input" type="email" placeholder="Email">
+    <input id="password" class="auth-input" type="password" placeholder="Password">
 
-    <input id="password" class="input" type="password" placeholder="Password">
+    <p id="error"></p>
 
-
-    <!-- ERROR MESSAGE -->
-    <p id="error" style="color:#ffcccc;margin-bottom:10px"></p>
-
-    <!-- WIRED BUTTON -->
     <button class="btn btn-secondary" style="width:100%" onclick="sendOtp()">
       Send OTP
     </button>
 
-    <p style="margin-top:20px">
-      Already have an account?
-      <a href="login.html">Login</a>
+    <p class="auth-footer">
+      Already have an account? <a href="login.html">Login</a>
     </p>
-
   </div>
 
-  <!-- IMPORTANT: LOAD auth.js -->
   <script src="js/auth.js"></script>
 
 </body>
