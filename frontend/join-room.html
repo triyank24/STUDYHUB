@@ -1,71 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Join Room | StudyHub</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard-theme.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .auth-wrapper {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 44px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .auth-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7c6fff, #a855f7);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c6fff, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(124, 111, 255, 0.4);
+    }
+
+    .logo-text {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--text);
+      letter-spacing: -0.4px;
+    }
+
+    .auth-wrapper h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .auth-wrapper .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      box-sizing: border-box;
+      text-align: center;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+
+    .auth-input::placeholder {
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+
+    .auth-input:focus {
+      border-color: var(--purple);
+      background: var(--purple-light);
+    }
+
+    #error {
+      color: var(--red);
+      font-size: 13px;
+      margin-bottom: 12px;
+      min-height: 18px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--purple);
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="card" style="max-width:500px">
-
-  <div class="logo">
-    <div class="logo-icon">S</div>
-    <div class="logo-text">StudyHub</div>
+  <div class="study-bg">
+    <span>📚</span><span>✏️</span><span>💡</span><span>🎓</span>
+    <span>📝</span><span>🔬</span><span>📐</span><span>🖊️</span>
+    <span>📓</span><span>⚗️</span><span>🧮</span><span>📏</span>
   </div>
 
-  <h2>Join a Room</h2>
-  <p class="subtitle">Enter the room code shared with you</p>
+  <div class="auth-wrapper">
+    <div class="logo">
+      <div class="logo-icon">S</div>
+      <div class="logo-text">StudyHub</div>
+    </div>
 
-  <input
-    id="roomCode"
-    class="input"
-    placeholder="Room code (e.g. AB12CD)"
-  >
+    <h2>Join a Room</h2>
+    <p class="subtitle">Enter the room code shared with you</p>
 
-  <p id="error" style="color:#ffcccc;margin-bottom:10px"></p>
+    <input id="roomCode" class="auth-input" placeholder="e.g. AB12CD">
 
-  <button class="btn btn-secondary" style="width:100%" onclick="joinRoom()">
-    Join Room
-  </button>
+    <p id="error"></p>
 
-  <p style="margin-top:20px">
-    <a href="dashboard.html">← Back to Dashboard</a>
-  </p>
+    <button class="btn btn-secondary" style="width:100%" onclick="joinRoom()">
+      Join Room
+    </button>
 
-</div>
+    <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+  </div>
 
-<script>
-  async function joinRoom() {
-    const code = document.getElementById("roomCode").value.trim();
-    const error = document.getElementById("error");
-    error.textContent = "";
+  <script>
+    async function joinRoom() {
+      const code = document.getElementById("roomCode").value.trim().toUpperCase();
+      const error = document.getElementById("error");
+      error.textContent = "";
 
-    if (!code) {
-      error.textContent = "Room code is required";
-      return;
+      if (!code) {
+        error.textContent = "Room code is required";
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+
+      try {
+        const res = await fetch("/api/room/join", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ code })
+        });
+
+        if (!res.ok) throw new Error("Invalid room code");
+
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        error.textContent = "Failed to join room — check the code and try again";
+      }
     }
-
-    const token = localStorage.getItem("token");
-
-    try {
-      const res = await fetch("/api/room/join", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ code })
-      });
-
-      if (!res.ok) throw new Error("Invalid room code");
-
-      window.location.href = "dashboard.html";
-    } catch (err) {
-      error.textContent = "Failed to join room";
-    }
-  }
-</script>
+  </script>
 
 </body>
+
 </html>

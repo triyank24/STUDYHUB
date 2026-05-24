@@ -50,7 +50,9 @@ async function loadRooms() {
     ` : ""}
   `;
 
-      div.querySelector("h3").onclick = () => {
+      div.style.cursor = "pointer";
+      div.onclick = (e) => {
+        if (e.target.classList.contains("delete-btn")) return;
         location.href = `room.html?roomId=${room._id}`;
       };
 
