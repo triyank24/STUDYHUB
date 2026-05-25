@@ -1,4 +1,4 @@
-const API = "https://studyhub-1-ccz8.onrender.com";
+const API = "https://studyhub-etxw.onrender.com";
 
 /* ================= SEND OTP (SIGN UP) ================= */
 
