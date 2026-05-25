@@ -9,26 +9,30 @@ const transporter = require("../config/mail");
 const router = express.Router();
 
 router.post("/send-otp", async (req, res) => {
-  const { email } = req.body;
+  try {
+    const { email } = req.body;
 
-  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-  await Otp.deleteMany({ email });
+    await Otp.deleteMany({ email });
+    await Otp.create({
+      email,
+      otp,
+      expiresAt: new Date(Date.now() + 5 * 60 * 1000)
+    });
 
-  await Otp.create({
-    email,
-    otp,
-    expiresAt: new Date(Date.now() + 5 * 60 * 1000)
-  });
+    await transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to: email,
+      subject: "StudyHub OTP",
+      text: `Your OTP is ${otp}`
+    });
 
-  await transporter.sendMail({
-    from: "StudyHub",
-    to: email,
-    subject: "StudyHub OTP",
-    text: `Your OTP is ${otp}`
-  });
-
-  res.json({ message: "OTP sent" });
+    res.json({ message: "OTP sent" });
+  } catch (err) {
+    console.error("OTP ERROR:", err); // will show in Render logs
+    res.status(500).json({ message: "Error: " + err.message });
+  }
 });
 
 router.post("/verify-otp", async (req, res) => {
