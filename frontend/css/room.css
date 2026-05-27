@@ -348,3 +348,17 @@ h1 {
 .back-link:hover {
     color: rgba(255, 255, 255, 0.55);
 }
+
+/* Make video elements fit mobile screen */
+video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+/* Fix room layout on mobile */
+.room-container,
+.conference-container {
+    flex-direction: column;
+    padding: 8px;
+}

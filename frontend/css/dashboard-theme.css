@@ -459,3 +459,28 @@ button[onclick*="Delete"]:hover {
   padding: 80px 0;
   grid-column: 1 / -1;
 }
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+
+  /* Hide sidebar on mobile */
+  .sidebar {
+    display: none;
+  }
+
+  /* Make main content take full width */
+  .main-content,
+  .content,
+  .dashboard-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: 10px !important;
+  }
+
+  /* Fix room cards */
+  .room-card,
+  .card {
+    width: 100% !important;
+    margin: 10px 0 !important;
+  }
+}

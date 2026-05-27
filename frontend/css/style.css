@@ -98,7 +98,7 @@ body {
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {
@@ -138,11 +138,25 @@ body {
 }
 
 /* ROOM COLORS */
-.c1 { background: linear-gradient(135deg, #1a73e8, #4285f4); }
-.c2 { background: linear-gradient(135deg, #34a853, #0f9d58); }
-.c3 { background: linear-gradient(135deg, #fbbc04, #f29900); }
-.c4 { background: linear-gradient(135deg, #ea4335, #d93025); }
-.c5 { background: linear-gradient(135deg, #8e24aa, #ab47bc); }
+.c1 {
+  background: linear-gradient(135deg, #1a73e8, #4285f4);
+}
+
+.c2 {
+  background: linear-gradient(135deg, #34a853, #0f9d58);
+}
+
+.c3 {
+  background: linear-gradient(135deg, #fbbc04, #f29900);
+}
+
+.c4 {
+  background: linear-gradient(135deg, #ea4335, #d93025);
+}
+
+.c5 {
+  background: linear-gradient(135deg, #8e24aa, #ab47bc);
+}
 
 /* LINKS */
 a {
@@ -156,19 +170,22 @@ a {
   .logo-text {
     font-size: 34px;
   }
+
   .subtitle {
     font-size: 18px;
   }
 }
+
 .delete-btn {
   margin-top: 10px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
   padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
 }
+
 /* ================= DASHBOARD LAYOUT ================= */
 
 .dashboard {
@@ -180,7 +197,7 @@ a {
 /* SIDEBAR */
 .sidebar {
   width: 170px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
@@ -194,7 +211,7 @@ a {
 }
 
 .logout-btn {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   padding: 12px;
   border-radius: 10px;
@@ -250,4 +267,27 @@ a {
   .dashboard-main {
     padding: 20px;
   }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+button,
+a {
+  min-height: 44px;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
 }

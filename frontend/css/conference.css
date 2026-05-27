@@ -148,3 +148,17 @@ canvas {
 .bottom-bar .end {
   background: #d93025;
 }
+
+/* Make video elements fit mobile screen */
+video {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Fix room layout on mobile */
+.room-container,
+.conference-container {
+  flex-direction: column;
+  padding: 8px;
+}
